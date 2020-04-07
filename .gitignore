@@ -60,3 +60,4 @@ buck-out/
 
 
 /android/app/google-services.json
+/ios/React_Native_Auth/GoogleService-Info.plist
