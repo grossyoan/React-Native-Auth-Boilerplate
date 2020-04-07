@@ -1,27 +1,20 @@
 // Loading.js
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, ActivityIndicator, StyleSheet} from 'react-native';
 import auth from '@react-native-firebase/auth';
-export default class Loading extends React.Component {
-  componentDidMount() {
-    auth().onAuthStateChanged((user) => {
-      this.props.navigation.navigate(user == null ? 'Signup' : 'Main');
-    });
-  }
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Loading</Text>
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
-}
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+const Loading = (props) => {
+  useEffect(() => {
+    auth().onAuthStateChanged((user) => {
+      props.navigation.navigate(user == null ? 'Signup' : 'Main');
+    });
+  });
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>Loading</Text>
+      <ActivityIndicator size="large" />
+    </View>
+  );
+};
+
+export default Loading;

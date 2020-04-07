@@ -13,13 +13,19 @@ export default class Login extends React.Component {
   };
   render() {
     return (
-      <View style={styles.container}>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Text>Login</Text>
         {this.state.errorMessage && (
           <Text style={{color: 'red'}}>{this.state.errorMessage}</Text>
         )}
         <TextInput
-          style={styles.textInput}
+          style={{
+            height: 40,
+            width: '90%',
+            borderColor: 'gray',
+            borderWidth: 1,
+            marginTop: 8,
+          }}
           autoCapitalize="none"
           placeholder="Email"
           onChangeText={(email) => this.setState({email})}
@@ -27,7 +33,13 @@ export default class Login extends React.Component {
         />
         <TextInput
           secureTextEntry
-          style={styles.textInput}
+          style={{
+            height: 40,
+            width: '90%',
+            borderColor: 'gray',
+            borderWidth: 1,
+            marginTop: 8,
+          }}
           autoCapitalize="none"
           placeholder="Password"
           onChangeText={(password) => this.setState({password})}
@@ -42,17 +54,3 @@ export default class Login extends React.Component {
     );
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textInput: {
-    height: 40,
-    width: '90%',
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginTop: 8,
-  },
-});
