@@ -31,3 +31,8 @@ npx react-native run-android
 ```
 npx react-native run-ios
 ```
+### To do
+- [ ] Add an UI Kit
+- [ ] Add style to the registration flow
+- [ ] Add link to a DB
+- [ ] Create generic layouts
