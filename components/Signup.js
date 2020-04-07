@@ -8,7 +8,7 @@ export default class SignUp extends React.Component {
   handleSignUp = () => {
     auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then(() => this.props.navigation.navigate('Main'))
+      .then(() => this.props.navigation.navigate('Home'))
       .catch((error) => this.setState({errorMessage: error.message}));
   };
   render() {
@@ -19,7 +19,7 @@ export default class SignUp extends React.Component {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <Text>Sign Up</Text>
+        <Text style={{fontSize: 30, fontWeight: 'bold'}}>Sign Up</Text>
         {this.state.errorMessage && (
           <Text style={{color: 'red'}}>{this.state.errorMessage}</Text>
         )}
@@ -46,15 +46,20 @@ export default class SignUp extends React.Component {
             borderColor: 'gray',
             borderWidth: 1,
             marginTop: 8,
+            marginBottom: 16,
           }}
           onChangeText={(password) => this.setState({password})}
           value={this.state.password}
         />
         <Button title="Sign Up" onPress={this.handleSignUp} />
-        <Button
-          title="Already have an account? Login"
-          onPress={() => this.props.navigation.navigate('Login')}
-        />
+        <View style={{flexDirection: 'row', marginTop: 8}}>
+          <Text>Already have an account?</Text>
+          <Text
+            style={{color: 'blue', marginLeft: 5}}
+            onPress={() => this.props.navigation.navigate('Login')}>
+            Login
+          </Text>
+        </View>
       </View>
     );
   }

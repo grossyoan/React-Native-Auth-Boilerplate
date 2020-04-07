@@ -8,13 +8,13 @@ export default class Login extends React.Component {
     const {email, password} = this.state;
     auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => this.props.navigation.navigate('Main'))
+      .then(() => this.props.navigation.navigate('Home'))
       .catch((error) => this.setState({errorMessage: error.message}));
   };
   render() {
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>Login</Text>
+        <Text style={{fontSize: 30, fontWeight: 'bold'}}>Login</Text>
         {this.state.errorMessage && (
           <Text style={{color: 'red'}}>{this.state.errorMessage}</Text>
         )}
@@ -39,6 +39,7 @@ export default class Login extends React.Component {
             borderColor: 'gray',
             borderWidth: 1,
             marginTop: 8,
+            marginBottom: 16,
           }}
           autoCapitalize="none"
           placeholder="Password"
@@ -46,10 +47,14 @@ export default class Login extends React.Component {
           value={this.state.password}
         />
         <Button title="Login" onPress={this.handleLogin} />
-        <Button
-          title="Don't have an account? Sign Up"
-          onPress={() => this.props.navigation.navigate('SignUp')}
-        />
+        <View style={{flexDirection: 'row', marginTop: 8}}>
+          <Text>Don't have an account?</Text>
+          <Text
+            style={{color: 'blue', marginLeft: 5}}
+            onPress={() => this.props.navigation.navigate('Signup')}>
+            Sign up
+          </Text>
+        </View>
       </View>
     );
   }

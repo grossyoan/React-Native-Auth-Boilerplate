@@ -1,12 +1,11 @@
-// Loading.js
 import React, {useEffect} from 'react';
-import {View, Text, ActivityIndicator, StyleSheet} from 'react-native';
+import {View, Text, ActivityIndicator} from 'react-native';
 import auth from '@react-native-firebase/auth';
 
-const Loading = (props) => {
+export default (props) => {
   useEffect(() => {
     auth().onAuthStateChanged((user) => {
-      props.navigation.navigate(user == null ? 'Signup' : 'Main');
+      props.navigation.navigate(user == null ? 'Signup' : 'Home');
     });
   });
   return (
@@ -16,5 +15,3 @@ const Loading = (props) => {
     </View>
   );
 };
-
-export default Loading;
