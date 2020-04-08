@@ -46,18 +46,19 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-const DbUserRoot = database().ref('users/' + auth().currentUser.uid + '/notes');
 
 const ToDoItem = ({todoItem: {todoItem: name, done}, id}) => {
   const [doneState, setDone] = useState(done);
   const onCheck = () => {
     setDone(!doneState);
-    DbUserRoot.update({
-      [id]: {
-        todoItem: name,
-        done: !doneState,
-      },
-    });
+    database()
+      .ref('users/' + auth().currentUser.uid + '/notes')
+      .update({
+        [id]: {
+          todoItem: name,
+          done: !doneState,
+        },
+      });
   };
   return (
     <View style={styles.todoItem}>
@@ -78,18 +79,23 @@ export default () => {
   const [todos, setTodos] = useState({});
   const [presentToDo, setPresentToDo] = useState('');
   let todosKeys = Object.keys(todos);
-  DbUserRoot.on('value', (snapshot) => {
-    let data = snapshot.val() ? snapshot.val() : {};
-    let todoItems = {...data};
-    setTodos(todoItems);
-  });
+  database()
+    .ref('users/' + auth().currentUser.uid + '/notes')
+    .on('value', (snapshot) => {
+      let data = snapshot.val() ? snapshot.val() : {};
+      let todoItems = {...data};
+      setTodos(todoItems);
+    });
 
   const addNewTodo = () => {
     if (presentToDo !== '') {
-      DbUserRoot.push().set({
-        done: false,
-        todoItem: presentToDo,
-      });
+      database()
+        .ref('users/' + auth().currentUser.uid + '/notes')
+        .push()
+        .set({
+          done: false,
+          todoItem: presentToDo,
+        });
       Alert.alert('Action!', 'A new To-do item was created');
       setPresentToDo('');
     } else {
@@ -98,7 +104,9 @@ export default () => {
   };
 
   const clearTodos = () => {
-    DbUserRoot.remove();
+    database()
+      .ref('users/' + auth().currentUser.uid + '/notes')
+      .remove();
   };
 
   return (
