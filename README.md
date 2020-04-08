@@ -10,18 +10,36 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 * XCode and an iOS Emulator
-* Android Studio and a Android Emulator
+* Android Studio and an Android Emulator
 
 
-### Installing
-
+### Start development environment
 #### Android and iOS
 
-Follow the getting started on https://rnfirebase.io/ to get your Firebase credentials for both iOS and Android.
+- Follow the getting started on https://rnfirebase.io/ to get your Firebase credentials for both iOS and Android.
+- Create a Realtime DB on Firebase and set these rules:
+```
+{
+    "rules": {
+        ".read": false,
+        ".write": false,
+        "users":
+        {
+            "$userId":
+            {
+                ".read": "auth.uid === $userId",
+                ".write": "auth.uid === $userId"
+            }
+        }
+    }
+}
+
+```
 
 ##### Android
 
 Launch the Emulator on Android Studio.
+
 ```
 npx react-native run-android
 ```
@@ -29,10 +47,20 @@ npx react-native run-android
 ##### iOS
 
 ```
+cd ios
+pod install
+cd ..
 npx react-native run-ios
 ```
+
+### Done
+- React Native routing system
+- Fully working authentication system (Signup/Login/Signout)
+- Firebase Realtime Database link with permission management (Read/Create/Update/Remove)
+- Task creation, push into DB and management (Status update and task removal)
+
 ### To do
-- [ ] Add an UI Kit
-- [ ] Add style to the registration flow
-- [ ] Add link to a DB
+- [x] Add style to the registration flow
+- [x] Add link to a DB
+- [ ] Fix performance issues (Causes still to be found)
 - [ ] Create generic layouts
