@@ -1,5 +1,5 @@
 // Main.js
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Alert,
   Text,
@@ -79,13 +79,14 @@ export default () => {
   const [todos, setTodos] = useState({});
   const [presentToDo, setPresentToDo] = useState('');
   let todosKeys = Object.keys(todos);
-  database()
-    .ref('users/' + auth().currentUser.uid + '/notes')
-    .on('value', (snapshot) => {
-      let data = snapshot.val() ? snapshot.val() : {};
-      let todoItems = {...data};
-      setTodos(todoItems);
-    });
+  useEffect(() => {
+    database()
+      .ref('users/' + auth().currentUser.uid + '/notes')
+      .on('value', (snapshot) => {
+        let data = snapshot.val() ? snapshot.val() : {};
+        setTodos(data);
+      });
+  }, []);
 
   const addNewTodo = () => {
     if (presentToDo !== '') {

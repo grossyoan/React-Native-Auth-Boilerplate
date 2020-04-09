@@ -1,7 +1,6 @@
 # React-Native-Auth-Boilerplate
 
-A React Native template with a working Firebase Authentication. 
-
+A React Native template with a working Firebase Authentication.
 
 ## Getting Started
 
@@ -9,15 +8,16 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-* XCode and an iOS Emulator
-* Android Studio and an Android Emulator
-
+- XCode and an iOS Emulator
+- Android Studio and an Android Emulator
 
 ### Start development environment
+
 #### Android and iOS
 
 - Follow the getting started on https://rnfirebase.io/ to get your Firebase credentials for both iOS and Android.
 - Create a Realtime DB on Firebase and set these rules:
+
 ```
 {
     "rules": {
@@ -54,13 +54,15 @@ npx react-native run-ios
 ```
 
 ### Done
+
 - React Native routing system
 - Fully working authentication system (Signup/Login/Signout)
 - Firebase Realtime Database link with permission management (Read/Create/Update/Remove)
 - Task creation, push into DB and management (Status update and task removal)
 
 ### To do
+
 - [x] Add style to the registration flow
 - [x] Add link to a DB
-- [ ] Fix performance issues (Causes still to be found)
+- [x] Fix performance issues (Was caused by a missing useEffect)
 - [ ] Create generic layouts
